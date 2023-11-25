@@ -5,12 +5,13 @@ from PyQt5 import uic
 from PyQt5.QtCore import Qt, QPoint
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QWidget, QApplication
+from ui import Ui_Form
 
 
-class Suprematism(QWidget):
+class Suprematism(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.setMouseTracking(True)
         self.pushButton.clicked.connect(self.drawf)
         self.qp = QPainter()
@@ -32,7 +33,7 @@ class Suprematism(QWidget):
         coords_ = [randint(10, 350), randint(10, 300)]
         D = randint(20, 100)
         R = D / 2
-        self.qp.setBrush(QColor(*[255, 255, 0]))
+        self.qp.setBrush(QColor(*[randint(0, 255) for _ in range(3)]))
         self.qp.drawEllipse(int(coords_[0] - R), int(coords_[1] - R), D, D)
 
     def initUI(self):
